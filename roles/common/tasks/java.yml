@@ -1,0 +1,7 @@
+---
+
+- name: Update APT package cache
+  action: apt update_cache=yes
+ 
+- name: Install Default OpenJDK
+  shell: apt-get -y install openjdk-7-jre

@@ -1,0 +1,7 @@
+# Install Common Packages
+- hosts: all
+  sudo: yes
+  roles:
+  - role: common
+  tasks:
+  - include: roles/common/tasks/java.yml
