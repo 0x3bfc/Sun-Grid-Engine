@@ -1,0 +1,7 @@
+# Install and Configure Sun Grid Engine
+
+- name: upload SGE files
+  copy: src=sge.tar.bz2 dest=/opt/
+
+- name: unarchive SGE files
+  shell: tar xvjf /opt/sge.tar.bz2 -C /opt

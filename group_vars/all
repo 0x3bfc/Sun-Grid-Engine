@@ -1,0 +1,16 @@
+# basic settings 
+SGE_ROOT: /opt/sge/
+SGE_CELL: default
+JAVA_ROOT: /usr/lib/jvm/java-7-openjdk-amd64/bin/
+QMASTER_PORT: 6444
+EXECD_PORT: 6445
+CLUSTER_NAME: sgecluster 
+JVM_LIB_PATH: /usr/lib/jvm/java-7-openjdk-amd64/jre/lib/amd64/server/libjvm.so
+ADMIN_USER: vagrant
+QMASTER_SPOOL_DIR: /var/spool/sge/qmaster
+EXECD_SPOOL_DIR: /var/spool/sge
+EXECD_INST_COUNT: 2 # number of execute instances
+ADMIN_HOST_LIST: master
+SUBMIT_HOST_LIST: master, slave1
+EXEC_HOST_LIST: master, slave1
+ADMIN_MAIL: admin@myadmin.com
