@@ -2,10 +2,14 @@
 - hosts: all
   sudo: yes
   roles:
-  - role: common
+   - role: common
   tasks:
-  - include: roles/common/tasks/java.yml
-  - include: roles/common/tasks/sge.yml
+   - include: roles/common/tasks/java.yml
+
+- hosts: master
+  sudo: yes
+  tasks:
+   - include: roles/common/tasks/sge.yml
 
 # NFS
 - hosts: all
@@ -22,3 +26,29 @@
   sudo: yes
   tasks:
    - include: roles/nfs/tasks/mount.yml
+
+# Sun Grid Engine
+# Install SGE Exec, Submit, ans Admin Services
+- hosts: master
+  sudo: yes
+  roles: 
+   - role: sge
+  tasks:
+   - include: roles/sge/tasks/master.yml
+
+- hosts: all
+  sudo: yes
+  tasks:
+   - include: roles/sge/tasks/slave.yml
+
+# Configure Parallel Environment
+- hosts: master
+  sudo: yes
+  tasks:
+   - include: roles/sge/tasks/pe.yml
+
+# configure SGE Complex and Cluster 
+- hosts: all
+  sudo: yes
+  tasks:
+   - include: roles/sge/tasks/complex.yml

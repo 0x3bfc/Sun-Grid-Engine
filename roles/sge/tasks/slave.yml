@@ -1,0 +1,12 @@
+---
+
+- name: Prepare exec and submit service on slave
+  shell: 
+    mkdir -p /var/spool/sge/{{ inventory_hostname }};
+    chown {{ ansible_ssh_user }}:root /var/spool/sge/{{ inventory_hostname }};
+    chmod 771 -R /var/spool/sge/{{ inventory_hostname }};
+
+- name: Install Exec & Submit Nodes
+  command: /opt/sge/inst_sge -x -noremote -auto /opt/sge/util/install_modules/sge.conf
+  args:
+    chdir: /opt/sge/

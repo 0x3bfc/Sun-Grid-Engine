@@ -1,8 +1,5 @@
 - name: Install python-apt, aptitude, and debconf-utils
-  shell: apt-get update && apt-get -y install python-apt aptitude debconf-utils python-software-properties
-
-#- name: Upgrade dist
-#  shell: apt-get -y dist-upgrade
+  shell: apt-get update && apt-get -y install python-apt aptitude debconf-utils python-software-properties csh
 
 - name: Set default locale to en_US.UTF-8
   debconf: name=locales question='locales/default_environment_locale' value=en_US.UTF-8 vtype='select'
@@ -24,4 +21,27 @@
 
 - name: Create the hosts file for all machines
   template: src=hosts.j2 dest=/etc/hosts
+
+- name: upload sge env
+  template: src=sge.j2 dest=/etc/profile.d/sge.sh
+
+- name: Set SGE Environment Variables
+  shell:
+    chmod 777 /etc/profile.d/sge.sh; 
+    echo "source /etc/profile.d/sge.sh" >> /etc/profile;
+    bash -c 'source /etc/profile';
+    bash -c 'source /etc/profile.d/sge.sh';
+    echo "source /etc/profile.d/sge.sh" >> /home/{{ ansible_ssh_user }}/.bashrc;
+    echo 'source /etc/profile.d/sge.sh' >> /home/{{ ansible_ssh_user }}/.profile;
+    bash -c 'source /home/{{ ansible_ssh_user }}/.bashrc';
+
+
+- name: copy private key
+  copy: src=id_rsa dest=/home/{{ ansible_ssh_user }}/.ssh/id_rsa
+
+- name: copy public key
+  copy: src=id_rsa.pub  dest=/home/{{ ansible_ssh_user }}/.ssh/id_rsa.pub
+
+- name: authorized keys
+  shell: cat /home/{{ ansible_ssh_user }}/.ssh/id_rsa.pub > /home/{{ ansible_ssh_user }}/.ssh/authorized_keys
 

@@ -1,0 +1,9 @@
+---
+
+- name: config sun grid engine
+  template: src=sge.j2  dest=/opt/sge/util/install_modules/sge.conf
+
+- name: change configuration permissions
+  shell: chmod 777 -R /opt/sge/
+
+

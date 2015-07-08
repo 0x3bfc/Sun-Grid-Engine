@@ -1,0 +1,14 @@
+---
+
+- name: Add configuration file
+  template: src=pe.j2 dest=/opt/sge/pe.conf
+
+- name: Install Parallel Env
+  shell: 
+     /opt/sge/bin/linux-x64/qconf -Ap /opt/sge/pe.conf;
+     /opt/sge/bin/linux-x64/qconf -mattr pe slots {{ groups['all'] | count  * ansible_processor_cores | int }} {{ PARALLEL_ENV }};
+     /opt/sge/bin/linux-x64/qconf -sp {{ PARALLEL_ENV }};
+     /opt/sge/bin/linux-x64/qconf -mattr queue pe_list {{ PARALLEL_ENV }} {{ QUEUE_NAME }}
+  environment:
+    SGE_ROOT: /opt/sge
+

@@ -1,0 +1,7 @@
+---
+
+- name: Install SGE Master Node
+  command: /opt/sge/inst_sge -m -auto /opt/sge/util/install_modules/sge.conf
+  args:
+    chdir: /opt/sge/
+

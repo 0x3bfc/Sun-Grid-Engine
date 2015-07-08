@@ -1,0 +1,36 @@
+---
+
+- name: upload complex configuration
+  template: src=complex.j2 dest=/opt/sge/complex.conf
+
+- name: configure SGE complex
+  shell: /opt/sge/bin/linux-x64/qconf -Mc /opt/sge/complex.conf
+  environment:
+    SGE_ROOT: /opt/sge
+
+- name: upload cluster configuration
+  template: src=cluster.j2 dest=/opt/sge/cluster.conf
+
+- name: configure SGE cluster
+  shell: /opt/sge/bin/linux-x64/qconf -Msconf /opt/sge/cluster.conf
+  environment:
+    SGE_ROOT: /opt/sge
+
+- name: setup complex values
+  shell: /opt/sge/bin/linux-x64/qconf -rattr exechost complex_values slots={{ ansible_processor_cores }},num_proc={{ ansible_processor_cores }},spock_mem={{ ansible_memtotal_mb }}m {{ inventory_hostname }}
+  environment:
+    SGE_ROOT: /opt/sge
+
+- name: stop execd
+  shell:
+    kill -9 `pidof sge_execd`
+  when: inventory_hostname != "master"
+
+- name: start execd
+  shell:
+    mkdir -p /var/spool/sge/{{ inventory_hostname }};
+    chown -R {{ ansible_ssh_user }}:{{ ansible_ssh_user }} /var/spool/sge/{{ inventory_hostname }};
+    /opt/sge/bin/linux-x64/sge_execd
+  environment:
+    SGE_ROOT: /opt/sge
+  when: inventory_hostname != "master"

@@ -11,6 +11,6 @@ QMASTER_SPOOL_DIR: /var/spool/sge/qmaster
 EXECD_SPOOL_DIR: /var/spool/sge
 EXECD_INST_COUNT: 2 # number of execute instances
 ADMIN_HOST_LIST: master
-SUBMIT_HOST_LIST: master, slave1
-EXEC_HOST_LIST: master, slave1
 ADMIN_MAIL: admin@myadmin.com
+QUEUE_NAME: all.q
+PARALLEL_ENV: spe
