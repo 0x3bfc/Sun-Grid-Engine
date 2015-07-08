@@ -1,19 +1,24 @@
 # Install Common Packages
-- hosts: all
-  sudo: yes
-  roles:
-  - role: common
-  tasks:
-  - include: roles/common/tasks/java.yml
-  - include: roles/common/tasks/sge.yml
+#- hosts: all
+#  sudo: yes
+#  roles:
+#  - role: common
+#  tasks:
+#  - include: roles/common/tasks/java.yml
+#  - include: roles/common/tasks/sge.yml
 
-# NFS and SGE 
-- hosts: master
-  sudo: yes
-  tasks:
-   - include: roles/nfs/tasks/exports.yml
-
+# NFS
 - hosts: all
   sudo: yes
   roles: 
    - role: nfs
+
+- hosts: masters
+  sudo: yes
+  tasks:
+   - include: roles/nfs/tasks/exports.yml
+
+- hosts: slaves
+  sudo: yes
+  tasks:
+   - include: roles/nfs/tasks/mount.yml

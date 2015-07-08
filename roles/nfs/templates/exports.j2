@@ -1,1 +1,1 @@
-/opt/sge	{% for host in groups['slaves'] %}{{ hostvars[host]['ansible_eth1']['ipv4']['address']  }}(rw,sync,no_root_squash,subtree_check,fsid=2){% if not loop.last %},{% endif %}{% endfor %}
+/opt/sge	{% for host in groups['slaves'] %}{{ hostvars[host]['ansible_eth1']['ipv4']['address'] }}(rw,sync,no_root_squash,subtree_check,fsid=2){% if not loop.last %}  {% endif %}{% endfor %}

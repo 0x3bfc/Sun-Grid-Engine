@@ -1,0 +1,2 @@
+- name: mount nfs /opt/sge 
+  mount: name=/opt/sge src="master:/opt/sge" fstype=nfs4 opts="proto=tcp,port=2049" state=mounted
