@@ -1,5 +1,7 @@
 #Sun Grid Engine 
 
+![Alt text](images/gridengine-logo.png "Grid Engine")
+
 Install and Configure Sun Grid Engine on Ubuntu 12.04 Cluster
 
 **Ubunut 12.04 LTS Vagrant box**
