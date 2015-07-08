@@ -6,16 +6,16 @@ Install and Configure Sun Grid Engine on Ubuntu 12.04 Cluster
 
 Check that you can get Ubuntu Precise 64 from 
 
-	vagrant init ubuntu/precise64; vagrant up --provider virtualbox
+	$ vagrant init ubuntu/precise64; vagrant up --provider virtualbox
 
 **Install Ansible**
  
 Ubuntu LTS 12.04
 
-   $ sudo apt-get install software-properties-common
-   $ sudo apt-add-repository ppa:ansible/ansible
-   $ sudo apt-get update
-   $ sudo apt-get install ansible
+     $ sudo apt-get install software-properties-common
+     $ sudo apt-add-repository ppa:ansible/ansible
+     $ sudo apt-get update
+     $ sudo apt-get install ansible
 
 Other Linux Distributions
 
