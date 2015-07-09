@@ -1,54 +1,60 @@
 # Install Common Packages
-- hosts: all
-  sudo: yes
-  roles:
-   - role: common
-  tasks:
-   - include: roles/common/tasks/java.yml
+#- hosts: all
+#  sudo: yes
+#  roles:
+#   - role: common
+#  tasks:
+#   - include: roles/common/tasks/java.yml
 
-- hosts: master
-  sudo: yes
-  tasks:
-   - include: roles/common/tasks/sge.yml
+#- hosts: master
+#  sudo: yes
+#  tasks:
+#   - include: roles/common/tasks/sge.yml
 
 # NFS
-- hosts: all
-  sudo: yes
-  roles: 
-   - role: nfs
+#- hosts: all
+#  sudo: yes
+#  roles: 
+#   - role: nfs
 
-- hosts: masters
-  sudo: yes
-  tasks:
-   - include: roles/nfs/tasks/exports.yml
+#- hosts: masters
+#  sudo: yes
+#  tasks:
+#   - include: roles/nfs/tasks/exports.yml
 
-- hosts: slaves
-  sudo: yes
-  tasks:
-   - include: roles/nfs/tasks/mount.yml
+#- hosts: slaves
+#  sudo: yes
+#  tasks:
+#   - include: roles/nfs/tasks/mount.yml
 
 # Sun Grid Engine
 # Install SGE Exec, Submit, ans Admin Services
-- hosts: master
-  sudo: yes
-  roles: 
-   - role: sge
-  tasks:
-   - include: roles/sge/tasks/master.yml
+#- hosts: master
+#  sudo: yes
+#  roles: 
+#   - role: sge
+#  tasks:
+#   - include: roles/sge/tasks/master.yml
 
-- hosts: all
-  sudo: yes
-  tasks:
-   - include: roles/sge/tasks/slave.yml
+#- hosts: all
+#  sudo: yes
+#  tasks:
+#   - include: roles/sge/tasks/slave.yml
 
 # Configure Parallel Environment
-- hosts: master
-  sudo: yes
-  tasks:
-   - include: roles/sge/tasks/pe.yml
+#- hosts: master
+#  sudo: yes
+#  tasks:
+#   - include: roles/sge/tasks/pe.yml
 
 # configure SGE Complex and Cluster 
+#- hosts: all
+#  sudo: yes
+#  tasks:
+#   - include: roles/sge/tasks/complex.yml
+
+# Install Docker Engine and get Bio-Docker Packages
 - hosts: all
   sudo: yes
-  tasks:
-   - include: roles/sge/tasks/complex.yml
+  roles:
+   - role: docker

@@ -1,0 +1,25 @@
+---
+- name: Install Linux image trusty
+  apt: name=linux-image-generic-lts-trusty state=installed
+
+#- name: restart machine
+#  command: shutdown -r now "Ansible updates triggered"
+#  async: 0
+#  poll: 0
+#  ignore_errors: true
+
+#- name: waiting for server to come back
+#  local_action: wait_for host={{ inventory_hostname }} state=started
+#  sudo: false
+
+- name: Install Docker Engine
+  shell: 
+    apt-get update;
+    apt-get install wget;
+    wget -qO- https://get.docker.com/ | sh
+
+- name: Download Bio-Docker Examples
+  git: repo=https://github.com/aabdulwahed/Bio-Docker.git dest=/home/{{ ansible_ssh_user }}/examples/
+
+- name: pull basic Ubuntu 12.04 LTS  image 
+  shell: docker pull ubuntu:12.04

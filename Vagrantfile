@@ -15,7 +15,7 @@ Vagrant.configure(2) do |config|
 		cfg.vm.provider :virtualbox do |virtualbox, override|
 			common_virtualbox.call virtualbox, override
 			cfg.vm.hostname = "master"
-			cfg.vm.network :private_network, ip: "192.168.0.10"
+			cfg.vm.network :private_network, ip: "192.168.0.7"
 			virtualbox.customize ["modifyvm", :id,"--memory", "1024"]
 		end
 	end
@@ -23,7 +23,7 @@ Vagrant.configure(2) do |config|
                 cfg.vm.provider :virtualbox do |virtualbox, override|
                         common_virtualbox.call virtualbox, override
                         cfg.vm.hostname = "slave1"
-			cfg.vm.network :private_network, ip: "192.168.0.11"
+			cfg.vm.network :private_network, ip: "192.168.0.8"
                         virtualbox.customize ["modifyvm", :id,"--memory", "1024"]
                 end
         end
@@ -31,7 +31,7 @@ Vagrant.configure(2) do |config|
                 cfg.vm.provider :virtualbox do |virtualbox, override|
                         common_virtualbox.call virtualbox, override
                         cfg.vm.hostname = "slave2"
-                        cfg.vm.network :private_network, ip: "192.168.0.12"
+                        cfg.vm.network :private_network, ip: "192.168.0.9"
                         virtualbox.customize ["modifyvm", :id,"--memory", "1024"]
                 end
         end
